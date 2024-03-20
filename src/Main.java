@@ -3,7 +3,7 @@ import ucn.*;
 public class Main {
     public static void main(String[] args) {
 
-        String CONTINUAR;
+        String CONTINUAR = "";
 
         //Lista para guardas las instancias de Persona
         Persona[] ListaPersonas = new Persona[200];
@@ -33,7 +33,7 @@ public class Main {
 
             switch (opcion) {
 
-
+                //Agregar a una Persona
                 case 1 -> {
 
                     Persona instanciaPersona = nuevaPersona();
@@ -41,12 +41,45 @@ public class Main {
                     ListaPersonas[cont] = instanciaPersona;
                     cont++;
 
-                    break;
-
                 }
+                
 
+                //Eliminar a una Persona
+                case 2 -> {
 
-                case 2 -> {}
+                    mostrarPersonas(ListaPersonas, cont);
+
+                    StdOut.print("\nIngrese el número de la persona que desea eliminar: ");
+                    int cambio = StdIn.readInt();
+                    cambio--;
+
+                    //Algoritmo para eliminar y ordenar la lista de las instancias
+                    for (int i = 0; i < cont; i++) {
+                        
+                        if (i == cambio) {
+
+                            for (int j = i; j < cont-1; j++) {
+
+                                ListaPersonas[j] = ListaPersonas[j+1];
+                                
+                            }
+                            cont--;
+                            break;
+                            
+                        }
+                        
+                    }
+
+                    StdOut.println("\nPersona eliminada con exito :)\n");
+                    mostrarPersonas(ListaPersonas, cont);
+
+                    StdOut.print("\nPresione ENTER para continuar");
+                    CONTINUAR = StdIn.readString();
+                    
+                }
+                
+                
+                //Modificar a una Persona
                 case 3 -> {
 
                     mostrarPersonas(ListaPersonas, cont);
@@ -83,6 +116,7 @@ public class Main {
                 }
 
 
+                //Mostrar Cantidad de Personas
                 case 4 -> {
 
                     mostrarPersonas(ListaPersonas, cont);
@@ -91,8 +125,10 @@ public class Main {
                     CONTINUAR = StdIn.readString();
 
                 }
-                case 5 -> {}
 
+
+                //Salir
+                case 5 -> {}
 
             }
 
